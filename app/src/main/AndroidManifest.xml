@@ -11,9 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AcronymApp_Albertsons_challenge"
         android:usesCleartextTraffic="true">
-        <activity android:name=".View.listActivity"
-            android:parentActivityName=".View.MainActivity"
-            android:launchMode="singleTop" />
         <activity android:name=".View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

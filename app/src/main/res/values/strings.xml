@@ -4,4 +4,5 @@
     <string name="lookup">Lookup</string>
     <string name="net_error">Network error</string>
     <string name="not_found">Acronym not found</string>
+    <string name="error_emptytext">Text cannot be empty</string>
 </resources>

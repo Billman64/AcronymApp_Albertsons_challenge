@@ -4,47 +4,51 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.github.billman64.acronymapp_albertsons_challenge.R
+import com.github.billman64.acronymapp_albertsons_challenge.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG:String = this.javaClass.simpleName + "--demo"
 
+    private var searchFragment: SearchFragment = SearchFragment()
+
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        // UI setup
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        error.visibility = View.GONE
-        button.setOnClickListener{
-            getAcronymData()
+        binding.searchButton.setOnClickListener {
+
+            val acro = binding.acronymEdittext.text.toString().trim()
+
+            if(acro.isNotEmpty())
+                openSearchFragment(acro)
+            else
+                Toast.makeText(this, getString(R.string.error_emptytext), Toast.LENGTH_SHORT).show()
         }
 
 
-        // Error handling
-
-        val bundle:Bundle? = intent.extras
-        bundle?.let{
-            val errorCode = it.getString("error")
-
-            error.text = errorCode
-            error.visibility = View.VISIBLE
-        }
     }
 
-    private fun getAcronymData(){
-
-        if(acronym.text.isNullOrBlank()) return     //reject blank input
-        else{
-
-            // intent for list activity
-            val i = Intent(this, listActivity::class.java)
-            val acro = acronym.text.toString().trim()
-
-            i.putExtra("acronym", acro)
-            startActivity(i)
+    private fun openSearchFragment(acro: String) {
+        val bundle = Bundle().also {
+            it.putString("acronym", acro)
         }
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right,
+                android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right
+            )
+            .add(R.id.main_frame, searchFragment.also {
+                it.arguments = bundle
+            }).addToBackStack(searchFragment.tag)
+            .commit()
     }
+
 }

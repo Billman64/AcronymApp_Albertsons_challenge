@@ -1,23 +1,13 @@
 package com.github.billman64.acronymapp_albertsons_challenge
 
-import android.content.Context
-import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.github.billman64.acronymapp_albertsons_challenge.Model.AcroAPI
-import com.github.billman64.acronymapp_albertsons_challenge.Model.AcroAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.github.billman64.acronymapp_albertsons_challenge.View.AcroAdapter
 
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.junit.Assert.*
-import retrofit2.Retrofit
-import retrofit2.awaitResponse
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Instrumented test, which will execute on an Android device.
